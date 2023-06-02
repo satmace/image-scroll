@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Slideshow</title>
+  <style>
+    .slideshow {
+      position: relative;
+      width: 50%;
+      overflow: hidden;
+    }
+
+    .slides {
+      display: flex;
+      width: 50%;
+    }
+
+    .slides img {
+      width: 50%;
+      height: auto;
+    }
+
+    .prev,
+    .next {
+      position: absolute;
+      top: 50%;
+      font-size: 30px;
+      font-weight: bold;
+      padding: 10px;
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    .prev {
+      left: 0;
+    }
+
+    .next {
+      right: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="slideshow">
+    <div class="slides">
+      <img src="1.jpeg" alt="Image 1">
+      <img src="2.jpeg" alt="Image 2">
+      <img src="3.jpeg" alt="Image 3">
+      <img src="4.jpeg" alt="Image 4">
+      <img src="5.jpeg" alt="Image 5">
+    </div>
+    <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+    <a class="next" onclick="changeSlide(1)">&#10095;</a>
+  </div>
+
+  <script>
+    let slideIndex = 1;
+    showSlide(slideIndex);
+
+    function changeSlide(n) {
+      showSlide(slideIndex += n);
+    }
+
+    function showSlide(n) {
+      const slides = document.getElementsByClassName("slides")[0].getElementsByTagName("img");
+
+      if (n > slides.length) {
+        slideIndex = 1;
+      }
+      if (n < 1) {
+        slideIndex = slides.length;
+      }
+
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+
+      slides[slideIndex - 1].style.display = "block";
+    }
+  </script>
+</body>
+</html>
